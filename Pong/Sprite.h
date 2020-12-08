@@ -20,6 +20,11 @@ public:
 		frame.y = ypos;
 	}
 	
+	virtual ~Sprite()
+	{
+		SDL_DestroyTexture(texture);
+	}
+
 	virtual int GetHeight() const { return frame.h; }
 	virtual int GetWidth() const { return frame.w; }
 	virtual int GetX() const { return frame.x; }
