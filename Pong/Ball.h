@@ -4,6 +4,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <memory>
 
 #include "Sprite.h"
 #include "Paddle.h"
@@ -14,7 +15,7 @@ public:
 	Ball(SDL_Renderer *renderer, const char* texturePath, int xpos, int ypos, int width, int height)
 		: Sprite(renderer, texturePath, xpos, ypos, width, height) { }
 
-	void Move(Paddle& player, Paddle& ai);
+	void Move(const std::shared_ptr<Paddle>& player, const std::shared_ptr<Paddle>& ai);
 	void StartPlayerAttack();
 	void StartAIAttack();
 

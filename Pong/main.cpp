@@ -6,8 +6,8 @@
 #include "Paddle.h"
 #include "AI.h"
 
-Game *game = nullptr;
-AI* ai = nullptr;
+std::shared_ptr<Game> game(nullptr);
+std::shared_ptr<AI> ai(nullptr);
 
 int main(int argc, char* argv[])
 {
@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	Uint32 Start;
 	int Time;
 
-	game = new Game();
+	game = std::make_shared<Game>();
 
 	game->Init();
 
@@ -28,13 +28,13 @@ int main(int argc, char* argv[])
 		new Score(game->GetRenderer(), WINDOW_WIDTH / 2 - 75, 0, 50, 50),
 		new Score(game->GetRenderer(), WINDOW_WIDTH / 2 + 25, 0, 50, 50));
 
-	ai = new AI();
+	ai = std::make_shared<AI>();
 	
-	game->AddSpriteToRender(&GameManager::GetBall());
-	game->AddSpriteToRender(&GameManager::GetPlayerPaddle());
-	game->AddSpriteToRender(&GameManager::GetAIPaddle());
-	game->AddSpriteToRender(&GameManager::GetPlayerScore());
-	game->AddSpriteToRender(&GameManager::GetAIScore());
+	game->AddSpriteToRender(GameManager::GetBall());
+	game->AddSpriteToRender(GameManager::GetPlayerPaddle());
+	game->AddSpriteToRender(GameManager::GetAIPaddle());
+	game->AddSpriteToRender(GameManager::GetPlayerScore());
+	game->AddSpriteToRender(GameManager::GetAIScore());
 
 	while (game->Running())
 	{
@@ -52,11 +52,6 @@ int main(int argc, char* argv[])
 	}
 
 	game->Clean();
-
-	delete ai;
-	delete game;
-
-	GameManager::Clean();
 
 	return 0;
 }

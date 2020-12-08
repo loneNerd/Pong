@@ -4,7 +4,9 @@
 
 #include <SDL.h>
 #include <iostream>
+#include <vector>
 #include <list>
+#include <memory>
 
 #include "Sprite.h"
 #include "GameManager.h"
@@ -16,7 +18,7 @@ class Game {
 public:
 	SDL_Renderer* GetRenderer() { return renderer; }
 
-	void AddSpriteToRender(Sprite* sprite) { Sprites.push_back(sprite); }
+	void AddSpriteToRender(const std::shared_ptr<Sprite>& sprite) { Sprites.push_back(sprite); }
 	void Init();
 	void HandleEvents();
 	void Update();
@@ -31,8 +33,8 @@ private:
 	SDL_Renderer *renderer;
 	SDL_Event event;
 
-	std::list<Sprite*> Sprites;
-	std::list<Sprite*> Net;
+	std::vector<std::shared_ptr<Sprite>> Sprites;
+	std::vector<std::shared_ptr<Sprite>> Net;
 };
 
 #endif //GAME_H_

@@ -8,7 +8,7 @@
 class AI
 {
 public:
-	void MakeMove(Paddle& paddle, Ball& ball);
+	void MakeMove(const std::shared_ptr<Paddle>& paddle, const std::shared_ptr<Ball>& ball);
 };
 
 #endif //AI_H_

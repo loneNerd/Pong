@@ -3,20 +3,20 @@
 
 const double PI = 3.14159265;
 
-void Ball::Move(Paddle& player, Paddle& ai)
+void Ball::Move(const std::shared_ptr<Paddle>& player, const std::shared_ptr<Paddle>& ai)
 {
 	if (frame.y <= 0 || frame.y + frame.w >= WINDOW_HEIGHT)
 		isMoveUp = !isMoveUp;
 
-	if ((frame.y + frame.h == player.GetY() && frame.x > player.GetX() && frame.x < player.GetX() + player.GetWidth()) ||
-		(frame.y + frame.h == ai.GetY() && frame.x + frame.w > ai.GetX() && frame.x + frame.w < ai.GetX() + ai.GetWidth()))
+	if ((frame.y + frame.h == player->GetY() && frame.x > player->GetX() && frame.x < player->GetX() + player->GetWidth()) ||
+		(frame.y + frame.h == ai->GetY() && frame.x + frame.w > ai->GetX() && frame.x + frame.w < ai->GetX() + ai->GetWidth()))
 		isMoveUp = true;
-	else if ((frame.y == player.GetY() + player.GetHeight() && frame.x > player.GetX() && frame.x < player.GetX() + player.GetWidth()) ||
-		(frame.y == ai.GetY() + ai.GetHeight() && frame.x + frame.w > ai.GetX() && frame.x + frame.w < ai.GetX() + ai.GetWidth()))
+	else if ((frame.y == player->GetY() + player->GetHeight() && frame.x > player->GetX() && frame.x < player->GetX() + player->GetWidth()) ||
+		(frame.y == ai->GetY() + ai->GetHeight() && frame.x + frame.w > ai->GetX() && frame.x + frame.w < ai->GetX() + ai->GetWidth()))
 		isMoveUp = false;
 
-	if ((frame.x == player.GetX() + player.GetWidth() && frame.y + frame.h > player.GetY() && frame.y < player.GetY() + player.GetHeight()) ||
-		(frame.x + frame.w == ai.GetX() && frame.y + frame.h > ai.GetY() && frame.y < ai.GetY() + ai.GetHeight()))
+	if ((frame.x == player->GetX() + player->GetWidth() && frame.y + frame.h > player->GetY() && frame.y < player->GetY() + player->GetHeight()) ||
+		(frame.x + frame.w == ai->GetX() && frame.y + frame.h > ai->GetY() && frame.y < ai->GetY() + ai->GetHeight()))
 		isMoveLeft = !isMoveLeft;
 
 	if (isMoveUp)
