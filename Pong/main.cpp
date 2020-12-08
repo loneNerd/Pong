@@ -13,7 +13,8 @@ int main(int argc, char* argv[])
 {
 	srand(time(0));
 
-	const int Delay = 2;
+	const int Delay = 325;
+	const int FramerateDelay = 1000 / Delay;
 
 	Uint32 Start;
 	int Time;
@@ -47,8 +48,8 @@ int main(int argc, char* argv[])
 
 		Time = SDL_GetTicks() - Start;
 
-		if (Delay > Time)
-			SDL_Delay(Delay - Time);
+		if (FramerateDelay > Time)
+			SDL_Delay(FramerateDelay - Time);
 	}
 
 	game->Clean();
